@@ -1,0 +1,19 @@
+---
+- name: install apache2 php
+  remote_user: ling
+  hosts: apacheserver
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install PHP
+      apt:
+        name:
+          - php
+        state: present
+      when: ansible_distribution_release in ['ubuntu', 'debian']
